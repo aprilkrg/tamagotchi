@@ -10,11 +10,11 @@ class Character {
         this.eatLevel = 10
         this.sleepLevel = 10
         this.trainingLevel = 0
-        console.log("character class", this)
+        console.log(this)
     }
     // === ! METHODS ! === //
     // what are functions that will effect the character? they should be defined here
-    changeStatLevel(statToChange) {
+    increaseStatLevel(statToChange) {
         // console.log the parameter to confirm it's working the way you think it is
         // console.log("stat passed:", statToChange)
         // if the stat level is at 10 guard it from increasing any more so the user can't go past 10
@@ -27,7 +27,7 @@ class Character {
 }
 const kitty = new Character()
 kitty.playLevel = 5
-kitty.changeStatLevel("playLevel")
+kitty.increaseStatLevel("playLevel")
 
 class Game {
     // === ! CONSTRUCTOR ! === //
@@ -35,7 +35,7 @@ class Game {
         // set the initial values to null so that we can use this intentional lack of value in conditional statements later
         this.timer = null
         this.gameOn = null
-        console.log("game class", this)
+        console.log(this)
     }
     // === ! METHODS ! === //
     gameTimer() {
@@ -48,6 +48,14 @@ class Game {
         // console log the time change to confirm it works
         // console.log(this.timer)
     }
+    decreaseStatLevel(obj,stat) {
+        // console log params to make sure it's working
+        // console.log("character:",obj,"\nstat:", stat)
+        obj[stat]--
+        return obj
+    }
 }
 const game = new Game()
 const gameclock = setInterval(function() {game.gameTimer()}, 1000)
+
+game.decreaseStatLevel(kitty, "eatLevel")
