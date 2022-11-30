@@ -51,11 +51,33 @@ class Game {
     decreaseStatLevel(obj,stat) {
         // console log params to make sure it's working
         // console.log("character:",obj,"\nstat:", stat)
+        // access the property on the object using bracket notation, and decrement
         obj[stat]--
+        // return the object so we can see it in the console as we test
+        return obj
+    }
+    handleStatChange(obj) {
+        // check that the param is grabbing the data you want
+        // console.log("handlestatchange",obj)
+        // loop over the key value pairs on the obj param 
+        for(let [key, value] of Object.entries(obj)) {
+            // if the value is a number and if it's greater than 1 then we want to effect it
+            if(Number.isInteger(value) && value >= 1) {
+                // decrement the stat
+                obj[key]--
+            }
+        }
+        // return obj to see the changes
         return obj
     }
 }
 const game = new Game()
-const gameclock = setInterval(function() {game.gameTimer()}, 1000)
+const gameInterval = setInterval(function() {
+    game.gameTimer()
+}, 1000)
 
-game.decreaseStatLevel(kitty, "eatLevel")
+// game.decreaseStatLevel(kitty, "eatLevel")
+// game.handleStatChange(kitty)
+const statInterval = setInterval(function() {
+    game.handleStatChange(kitty)
+}, 1000)
