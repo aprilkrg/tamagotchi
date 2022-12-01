@@ -17,22 +17,15 @@ class Character {
 	// what are functions that will effect the character? they should be defined here
 	increaseStatLevel(event) {
         console.log("increase stat invoked")
-		// console.log the parameter to confirm it's working the way you think it is
-		// console.log("stat passed:", statToChange)
-		// if the stat level is at 10 guard it from increasing any more so the user can't go past 10
-		// if (this[statToChange] >= 10) return
-		// // if the stat doesn't get returned up above, then increase it's value
-		// this[statToChange]++
-        // // render any changes to DOM
-        // render()
-		// // return the value so you know it works
-		// return this[statToChange]
+		// console.log the event
+		// console.log("event:", event.target)
         // concatenate the id of the event target with level 
         const statId = event.target.id + "Level"
         // console.log(statId)
         // use the statId to effect the charObj
         Character.charObj[statId]++
-        console.log(Character.charObj[statId])
+        // console.log(Character.charObj[statId])
+        render()
 	}
 }
 
