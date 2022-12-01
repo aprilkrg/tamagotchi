@@ -62,6 +62,8 @@ class Game {
         Game.gameObj.statInterval = setInterval(function() {
             Game.gameObj.handleStatChange(Character.charObj)
         }, 3000)
+        const startBtn = document.querySelector("#start");
+        startBtn.style.display = "none";
     }
 	handleStatChange() {
 		// check that the param is grabbing the data you want
@@ -87,18 +89,28 @@ class Game {
 				// stop the intervals
 				clearInterval(Game.gameObj.timerInterval)
 				clearInterval(Game.gameObj.statInterval)
+                // update the DOM
+                const msg = document.querySelector("h2")
+                msg.innerText = "YOU LOSE"
 			}
 		}
         // === ! YOU WIN ! === //
-        console.log(Game.gameObj.timer)
-        // if(Game.gameObj.timer)
+        // console.log(Game.gameObj.timer)
+        if(Game.gameObj.timer > 29) {
+            console.log("YOU WIN")
+            clearInterval(Game.gameObj.timerInterval)
+            clearInterval(Game.gameObj.statInterval)
+            // update the DOM
+            const msg = document.querySelector("h2")
+            msg.innerText = "YOU WIN"
+        }
 	}
 }
 
 const render = function() {
     console.log("render invoked")
 
-    // check for game over conditions
+    // check for game over conditions before rendering
     Game.gameObj.gameOver()
 
     // === ! Data & DOM for chatacter ! === //
@@ -151,10 +163,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
+        // create new class instances
         const doggo = new Character()
         Character.charObj = doggo
         const bored = new Game()
         Game.gameObj = bored
+        // set intervals to null
+        Game.gameObj.timerInterval = null
+        Game.gameObj.statInterval = null
+        // reveal the start button again
+        const startBtn = document.querySelector("#start");
+        startBtn.style.display = "block";
+        // render new game
         render()
     })
 })
