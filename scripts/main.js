@@ -15,18 +15,24 @@ class Character {
 	}
 	// === ! METHODS ! === //
 	// what are functions that will effect the character? they should be defined here
-	increaseStatLevel(statToChange) {
-        console.log("increase stat invoked", statToChange)
+	increaseStatLevel(event) {
+        console.log("increase stat invoked")
 		// console.log the parameter to confirm it's working the way you think it is
 		// console.log("stat passed:", statToChange)
 		// if the stat level is at 10 guard it from increasing any more so the user can't go past 10
-		if (this[statToChange] >= 10) return
-		// if the stat doesn't get returned up above, then increase it's value
-		this[statToChange]++
-        // render any changes to DOM
-        render()
-		// return the value so you know it works
-		return this[statToChange]
+		// if (this[statToChange] >= 10) return
+		// // if the stat doesn't get returned up above, then increase it's value
+		// this[statToChange]++
+        // // render any changes to DOM
+        // render()
+		// // return the value so you know it works
+		// return this[statToChange]
+        // concatenate the id of the event target with level 
+        const statId = event.target.id + "Level"
+        // console.log(statId)
+        // use the statId to effect the charObj
+        Character.charObj[statId]++
+        console.log(Character.charObj[statId])
 	}
 }
 
@@ -139,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Game.gameObj.gameStart(timerInterval, statInterval)
         // attach event listeners to buttons
         for (let i = 0; i < statBtns.length; i++) {
-            statBtns[i].addEventListener("click", kitty.increaseStatLevel);
+            statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel);
         };
         // invoke render function
         render(game,kitty)
