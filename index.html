@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- VENDOR STYLES -->
-    <!-- copied from https://fonts.google.com/specimen/Roboto#styles -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- PERSONAL STYLES -->
-    <link href="./styles/main.css" rel="stylesheet">
-    <script defer src="./scripts/main.js"></script>
-    <title>TAMAGOTCHI</title>
-</head>
-<body>
-    <div>
-        <!-- Instructions and game info -->
-        <h2>Begin the game by pressing the start button</h2>
-        <button id="start">Start Game</button>
-        <p>Time:<span id="timer"></span></p>
-        <!-- display character stats -->
-        <section class="board">
-            <p id="playLevel">0</p>
-            <p id="eatLevel">0</p>
-            <p id="sleepLevel">0</p>
-        </section>
-        <!-- buttons for player -->
-        <section class="card">
-            <button class="stat" id="play">Play</button>
-            <button class="stat" id="eat">Eat</button>
-            <button class="stat" id="sleep">Sleep</button>
-        </section>
-        <!-- Reset button -->
-        <button id="reset">Reset</button>
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- VENDOR STYLES -->
+		<!-- copied from https://fonts.google.com/specimen/Roboto#styles -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- PERSONAL STYLES -->
+		<link href="./styles/main.css" rel="stylesheet" />
+		<script defer src="./scripts/main.js"></script>
+		<title>TAMAGOTCHI</title>
+	</head>
+	<body>
+		<div>
+			<div id="top">
+				<!-- Instructions and game info -->
+				<h2>Begin the game by pressing the start button</h2>
+				<button id="start">Start Game</button>
+				<p>Time: <span id="timer"></span></p>
+			</div>
+			<div id="middle">
+                <section>
+                    <!-- display character stats -->
+					<p id="playLevel">0</p>
+					<p id="eatLevel">0</p>
+					<p id="sleepLevel">0</p>
+				</section>
+				<section>
+                    <!-- buttons for player -->
+					<button class="stat" id="play">Play</button>
+					<button class="stat" id="eat">Eat</button>
+					<button class="stat" id="sleep">Sleep</button>
+				</section>
+			</div>
+			<div id="bottom">
+                <!-- Reset button -->
+				<button id="reset">Reset</button>
+			</div>
+		</div>
+	</body>
 </html>

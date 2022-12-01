@@ -134,9 +134,9 @@ const render = function() {
     
     // === ! Data & DOM for game ! === //
     // create dom variables
-    const timer = document.querySelector("#timer")
+    const timerEl = document.querySelector("#timer")
     // set inner text of html
-    timer.innerText = Game.gameObj.timer
+    timerEl.innerText = Game.gameObj.timer
 }
 
 document.addEventListener("DOMContentLoaded", function () {
