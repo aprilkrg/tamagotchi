@@ -19,9 +19,12 @@ class Character {
     increaseStatLevel(event) {
         console.log("increase stat invoked")
         const statId = event.target.id + "Level"
-        Character.charObj[statId]++
+        // guard against values going over 10
+        if(Character.charObj[statId] < 10) {
+            Character.charObj[statId]++
+            render()
+        }
         console.log("after change",Character.charObj)
-        render()
     }
 }
 
@@ -82,6 +85,10 @@ class Game {
                 console.log("GAME OVER")
                 clearInterval(Game.gameObj.timerInterval)
                 clearInterval(Game.gameObj.statInterval)
+                const msg = document.querySelector("h1")
+                console.log(msg)
+                msg.innerText = "YOU LOSE TRY AGAIN"
+                return
             }
         }
 
@@ -106,16 +113,18 @@ const render = function() {
     const playStatEl = document.querySelector("#playLevel")
     const eatStatEl = document.querySelector("#eatLevel")
     const sleepStatEl = document.querySelector("#sleepLevel")
+    const timerEl = document.querySelector("#timer")
 
     // set styling on dom vars
     playStatEl.style.width = Character.charObj.playLevel + "rem"
     eatStatEl.style.width = Character.charObj.eatLevel + "rem"
     sleepStatEl.style.width = Character.charObj.sleepLevel + "rem"
 
-    // set inner text on stats
+    // set inner text on stats & timer
     playStatEl.innerText = Character.charObj.playLevel
     eatStatEl.innerText = Character.charObj.eatLevel
     sleepStatEl.innerText = Character.charObj.sleepLevel
+    timerEl.innerText = Game.gameObj.timer
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -152,5 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
+        // create new isntances of game
+        render()
     })
 })
