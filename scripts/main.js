@@ -21,6 +21,7 @@ class Character {
         const statId = event.target.id + "Level"
         Character.charObj[statId]++
         console.log("after change",Character.charObj)
+        render()
     }
 }
 
@@ -110,6 +111,11 @@ const render = function() {
     playStatEl.style.width = Character.charObj.playLevel + "rem"
     eatStatEl.style.width = Character.charObj.eatLevel + "rem"
     sleepStatEl.style.width = Character.charObj.sleepLevel + "rem"
+
+    // set inner text on stats
+    playStatEl.innerText = Character.charObj.playLevel
+    eatStatEl.innerText = Character.charObj.eatLevel
+    sleepStatEl.innerText = Character.charObj.sleepLevel
 }
 
 document.addEventListener("DOMContentLoaded", function() {
