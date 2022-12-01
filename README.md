@@ -9,6 +9,7 @@ The original life simulation game - Tamagotchi! The player creates and cares for
 - CSS
 
 ## Wireframes
+![low fidelity wire frame](https://i.imgur.com/5jfWYUL.png)
 
 ## MVP Goals
 - user can create a tamagotchi character
