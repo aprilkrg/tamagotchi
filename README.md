@@ -11,27 +11,27 @@ The original life simulation game - Tamagotchi! The player creates and cares for
 ## Wireframes
 
 ## MVP Goals
-- user can create a tamagotchi character
 - character starting stats are maxed out and display on screen
 - user clicks button to start the game
 - game automatically descreases characters stats
 - user increases character stats by clicking coresponding buttons
-- character avatar will evolve after a set time (win condition)
-- character will devolve/die if any stat reaches 0 (lose condition)
-- user is given a choice to reset the game after win or lose
+- character will die if any stat reaches 0 (lose condition)
+- player will win if the timer reaches 60 (win condition)
+- user is given a choice to reset the game after game over
 
 ## Stretch Goals
 - user can set a name for their character
-- display character avatar as an egg before user starts game
+- character has a avater
+- character avatar will evolve after a set time (win condition) or devolve (lose condition)
 
 ## Roadblocks
 - keeping data if the user refreshes the page (not how the game should work but an interesting idea)
 
 ## Icebox
+- display character avatar as an egg before user starts game
 - decrease the characters stats more quickly/randomly
 
 NEXT: [PROJECT STEPS](https://hackmd.io/b2h8sMIFRCW-tZSlQ_IbjQ)
 
-- remove start button and message after game start
-- on lose display big message
+
 - guard stats against going over 10

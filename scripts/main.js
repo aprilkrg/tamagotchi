@@ -8,7 +8,7 @@ class Character {
 	// create the properties of the character and sets their initial value
 	constructor() {
 		this.name = "pet"
-		this.playLevel = 2
+		this.playLevel = 10
 		this.eatLevel = 10
 		this.sleepLevel = 10
 		console.log(this)
@@ -22,10 +22,13 @@ class Character {
         // concatenate the id of the event target with level 
         const statId = event.target.id + "Level"
         // console.log(statId)
-        // use the statId to effect the charObj
-        Character.charObj[statId]++
-        // console.log(Character.charObj[statId])
-        render()
+        // check if stat is under 10 to protect against button smashing
+        if(Character.charObj[statId] < 10) {
+            // use the statId to effect the charObj
+            Character.charObj[statId]++
+            // console.log(Character.charObj[statId])
+            render()
+        }
 	}
 }
 
@@ -171,9 +174,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // set intervals to null
         Game.gameObj.timerInterval = null
         Game.gameObj.statInterval = null
-        // reveal the start button again
+        // reveal the start button & msg again
         const startBtn = document.querySelector("#start");
         startBtn.style.display = "block";
+        const msg = document.querySelector("h2")
+        msg.innerText = "Begin the game by pressing the start button"
         // render new game
         render()
     })
