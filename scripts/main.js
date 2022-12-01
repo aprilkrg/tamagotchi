@@ -58,13 +58,34 @@ class Game {
     }
     gameStart() {
         console.log("game start invoked", Game.gameObj.timer)
+        // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
         }, 1000)
-
+        // decreases the stats of the character
         Game.gameObj.statInterval = setInterval(function(){
             Game.gameObj.handleStatChange()
+            Game.gameObj.gameOver()
         }, 1000)
+    }
+    gameOver() {
+        console.log("game over invoked")
+        // === ! LOSE CONDITION ! === //
+        // loop over character key value pairs
+        // conditionally check if the value is a number && that value is less than 1
+        // if both are true then clear intervals and display lose msg
+        for(let [key, value] of Object.entries(Character.charObj)) {
+            if(Number.isInteger(value) && value === 0) {
+                console.log("GAME OVER")
+                clearInterval(Game.gameObj.timerInterval)
+                clearInterval(Game.gameObj.statInterval)
+            }
+        }
+
+        // === ! WIN CONDITION ! === //
+        // check the value of game timer, if it's 30 or more then you win
+        // clear the intervals
+        // display win msg
     }
 }
 
