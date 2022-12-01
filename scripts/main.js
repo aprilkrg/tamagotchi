@@ -66,6 +66,7 @@ class Game {
         // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
+            // NOTE do i need to invoke game over here or is that taken care of elsewhere??????
             render()
         }, 1000)
         // decreases the stats of the character
@@ -166,6 +167,15 @@ document.addEventListener("DOMContentLoaded", function() {
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
         // create new isntances of game
+        const doggo = new Character()
+        Character.charObj = doggo
+        const game2 = new Game()
+        Game.gameObj = game2
+
+        // change h1 to original msg
+        const msg = document.querySelector("h1")
+        msg.innerText = "Begin the game by pressing the Start button"
+
         render()
     })
 })
