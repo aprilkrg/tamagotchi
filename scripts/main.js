@@ -130,10 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
 
-    // // === ! INTERVAL VARIABLES ! === //
-    // const timerInterval = Game.gameObj.timerInterval
-    // const statInterval = Game.gameObj.statInterval
-
     // === ! CLASS INSTANCES ! === //
     const kitty = new Character()
     Character.charObj = kitty
@@ -143,7 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function() {
         console.log("start btn clicked")
-
         // invoke games start method
         Game.gameObj.gameStart()
         // attach event listeners to buttons
@@ -151,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
             statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel);
         };
         // invoke render function
-        render(game,kitty)
+        render()
     })
 
     resetBtn.addEventListener("click", function() {

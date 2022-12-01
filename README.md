@@ -31,3 +31,7 @@ The original life simulation game - Tamagotchi! The player creates and cares for
 - decrease the characters stats more quickly/randomly
 
 NEXT: [PROJECT STEPS](https://hackmd.io/b2h8sMIFRCW-tZSlQ_IbjQ)
+
+- remove start button and message after game start
+- on lose display big message
+- guard stats against going over 10
