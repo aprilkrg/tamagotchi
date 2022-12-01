@@ -108,6 +108,8 @@ const render = function() {
 
     // set styling on dom vars
     playStatEl.style.width = Character.charObj.playLevel + "rem"
+    eatStatEl.style.width = Character.charObj.eatLevel + "rem"
+    sleepStatEl.style.width = Character.charObj.sleepLevel + "rem"
 }
 
 document.addEventListener("DOMContentLoaded", function() {

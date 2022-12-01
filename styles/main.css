@@ -22,3 +22,15 @@ body {
 #playLevel {
     width: 10rem;
 }
+#eat, #eatLevel {
+    background-color: var(--yellow-green);
+}
+#eatLevel {
+    width: 10rem;
+}
+#sleep, #sleepLevel {
+    background-color: var(--lavender);
+}
+#sleepLevel {
+    width: 10rem;
+}
