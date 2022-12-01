@@ -8,10 +8,7 @@
 		<!-- copied from https://fonts.google.com/specimen/Roboto#styles -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-			rel="stylesheet"
-		/>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 		<!-- PERSONAL STYLES -->
 		<link href="./styles/main.css" rel="stylesheet" />
 		<script defer src="./scripts/main.js"></script>
@@ -23,25 +20,22 @@
 				<!-- Instructions and game info -->
 				<h2>Begin the game by pressing the start button</h2>
 				<button id="start">Start Game</button>
+                <button id="reset">Reset</button>
 				<p>Time: <span id="timer"></span></p>
 			</div>
 			<div id="middle">
-                <section>
+                <section class="board btns">
+                    <!-- buttons for player -->
+                    <button class="stat" id="play">Play</button>
+                    <button class="stat" id="eat">Eat</button>
+                    <button class="stat" id="sleep">Sleep</button>
+                </section>
+                <section class="board levels">
                     <!-- display character stats -->
 					<p id="playLevel">0</p>
 					<p id="eatLevel">0</p>
 					<p id="sleepLevel">0</p>
 				</section>
-				<section>
-                    <!-- buttons for player -->
-					<button class="stat" id="play">Play</button>
-					<button class="stat" id="eat">Eat</button>
-					<button class="stat" id="sleep">Sleep</button>
-				</section>
-			</div>
-			<div id="bottom">
-                <!-- Reset button -->
-				<button id="reset">Reset</button>
 			</div>
 		</div>
 	</body>

@@ -124,9 +124,9 @@ const render = function() {
 	const eatStat = document.querySelector("#eatLevel");
 	const sleepStat = document.querySelector("#sleepLevel");
     // change width of html
-    playStat.style.width = Character.charObj.playLevel + 'rem';
-	eatStat.style.width = Character.charObj.eatLevel + 'rem';
-	sleepStat.style.width = Character.charObj.sleepLevel + 'rem';
+    playStat.style.height = Character.charObj.playLevel + 'rem';
+	eatStat.style.height = Character.charObj.eatLevel + 'rem';
+	sleepStat.style.height = Character.charObj.sleepLevel + 'rem';
     // set inner text of html
     playStat.innerText = Character.charObj.playLevel;
 	eatStat.innerText = Character.charObj.eatLevel;
