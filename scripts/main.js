@@ -14,6 +14,7 @@ class Character {
 	// === ! METHODS ! === //
 	// what are functions that will effect the character? they should be defined here
 	increaseStatLevel(statToChange) {
+        console.log("increase stat invoked")
 		// console.log the parameter to confirm it's working the way you think it is
 		// console.log("stat passed:", statToChange)
 		// if the stat level is at 10 guard it from increasing any more so the user can't go past 10
@@ -117,8 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	// statInterval = setInterval(function () {
 	// 	game.handleStatChange(kitty)
 	// }, 3000)
-
+    // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
+    const statBtns = document.querySelectorAll(".stat")
+    const resetBtn = document.querySelector("#reset")
+    // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function() {
         console.log("start btn clicked")
         // create new instances of each class for new game
@@ -126,10 +130,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const game = new Game()
         // invoke games start method
         game.gameStart()
+        // attach event listeners to buttons
+        for (let i = 0; i < statBtns.length; i++) {
+            statBtns[i].addEventListener("click", kitty.increaseStatLevel);
+        };
         // invoke render function
         render(game,kitty)
     })
-    const resetBtn = document.querySelector("#reset")
+
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
     })
