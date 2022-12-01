@@ -86,7 +86,7 @@ class Game {
                 clearInterval(Game.gameObj.timerInterval)
                 clearInterval(Game.gameObj.statInterval)
                 const msg = document.querySelector("h1")
-                console.log(msg)
+                // console.log(msg)
                 msg.innerText = "YOU LOSE TRY AGAIN"
                 return
             }
@@ -100,6 +100,10 @@ class Game {
             console.log("YOU WIN")
             clearInterval(Game.gameObj.timerInterval)
             clearInterval(Game.gameObj.statInterval)
+            const msg = document.querySelector("h1")
+            // console.log(msg)
+            msg.innerText = "YOU WIN DO YOU WANT TO PLAY AGAIN"
+            return
         }
     }
 }
