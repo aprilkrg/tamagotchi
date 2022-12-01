@@ -47,6 +47,9 @@ class Game {
 		this.timer++
 		// console log the time change to confirm it works
 		// console.log(this.timer)
+        // update the DOM
+        const timer = document.querySelector("#timer")
+        timer.innerText = Game.gameObj.timer
 	}
     gameStart(timerInterval, statInterval) {
         console.log("game start invoked")
