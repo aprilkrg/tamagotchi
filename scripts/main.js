@@ -49,15 +49,10 @@ class Game {
 	}
     gameStart() {
         console.log("game start invoked")
-        // console.log(Game.gameInterval)
-        // obj.gameInterval = setInterval(function(){
-        //     obj.gameTimer()
-        //     // console.log(obj.gameTimer)
-        // }, 1000)
     }
 	handleStatChange(obj) {
 		// check that the param is grabbing the data you want
-		console.log("handlestatchange", obj)
+		console.log("handle stat change invoked", obj)
 		// loop over the key value pairs on the obj param
 		for (let [key, value] of Object.entries(obj)) {
 			// if the value is a number and if it's greater than 1 then we want to effect it
@@ -71,6 +66,7 @@ class Game {
 		// return obj
 	}
 	gameOver(obj) {
+        console.log("game over invoked")
 		// check the param data is what you think it is
 		// console.log(obj)
 		for (let [key, value] of Object.entries(obj)) {
@@ -86,6 +82,7 @@ class Game {
 }
 
 const render = function(gameObj,charObj) {
+    console.log("render invoked")
     // === ! Data & DOM for chatacter ! === //
     // create dom variables
     const playStat = document.querySelector("#playLevel");
@@ -109,15 +106,6 @@ const render = function(gameObj,charObj) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("main.js loaded")
-	// kitty.playLevel = 5
-	// kitty.increaseStatLevel("playLevel")
-
-	// gameInterval = setInterval(function () {
-	// 	game.gameTimer()
-	// }, 1000)
-	// statInterval = setInterval(function () {
-	// 	game.handleStatChange(kitty)
-	// }, 3000)
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
     const statBtns = document.querySelectorAll(".stat")
