@@ -62,6 +62,7 @@ class Game {
         // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
+            render()
         }, 1000)
         // decreases the stats of the character
         Game.gameObj.statInterval = setInterval(function(){
@@ -95,6 +96,20 @@ class Game {
     }
 }
 
+const render = function() {
+    console.log("render invoked")
+    // check if the game should end
+    Game.gameObj.gameOver()
+
+    // === ! DOM VARS ! === //
+    const playStatEl = document.querySelector("#playLevel")
+    const eatStatEl = document.querySelector("#eatLevel")
+    const sleepStatEl = document.querySelector("#sleepLevel")
+
+    // set styling on dom vars
+    playStatEl.style.width = Character.charObj.playLevel + "rem"
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     console.log("main.js loaded")
 
@@ -113,7 +128,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
     const statBtns = document.querySelectorAll(".stat")
-    // console.log(statBtns)
+    const resetBtn = document.querySelector("#reset")
+    // console.log(resetBtn)
     
     // === ! EVENT LISTENER ! === //
     startBtn.addEventListener("click", function(){
@@ -124,5 +140,9 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i = 0; i < statBtns.length; i++) {
             statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel)
         }
+        render()
+    })
+    resetBtn.addEventListener("click", function() {
+        console.log("reset btn clicked")
     })
 })
