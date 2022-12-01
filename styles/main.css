@@ -34,7 +34,7 @@ button {
     background-color: var(--green-blue);
 }
 #playLevel {
-    width: 10rem;
+    width: 1rem;
     padding: 20px;
 }
 #eat, #eatLevel {
@@ -42,7 +42,7 @@ button {
     background-color: var(--yellow-green);
 }
 #eatLevel {
-    width: 10rem;
+    width: 1rem;
     padding: 20px;
 }
 #sleep, #sleepLevel {
@@ -50,6 +50,6 @@ button {
     background-color: var(--lavender);
 }
 #sleepLevel {
-    width: 10rem;
+    width: 1rem;
     padding: 20px;
 }

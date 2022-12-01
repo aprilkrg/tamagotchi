@@ -6,7 +6,7 @@ class Character {
 	// create the properties of the character and sets their initial value
 	constructor() {
 		this.name = "pet"
-		this.playLevel = 10
+		this.playLevel = 8
 		this.eatLevel = 10
 		this.sleepLevel = 10
 		console.log(this)
@@ -21,6 +21,8 @@ class Character {
 		if (this[statToChange] >= 10) return
 		// if the stat doesn't get returned up above, then increase it's value
 		this[statToChange]++
+        // render any changes to DOM
+        render()
 		// return the value so you know it works
 		return this[statToChange]
 	}
@@ -47,8 +49,9 @@ class Game {
 		// console log the time change to confirm it works
 		// console.log(this.timer)
 	}
-    gameStart() {
+    gameStart(timerParam, gameObj) {
         console.log("game start invoked")
+        timerParam = setInterval(function() {gameObj.gameTimer()}, 1000)
     }
 	handleStatChange(obj) {
 		// check that the param is grabbing the data you want
@@ -62,6 +65,8 @@ class Game {
 				this.gameOver(obj)
 			}
 		}
+        // render any changes to DOM
+        render()
 		// return obj to see the changes
 		// return obj
 	}
@@ -83,6 +88,7 @@ class Game {
 
 const render = function(gameObj,charObj) {
     console.log("render invoked")
+
     // === ! Data & DOM for chatacter ! === //
     // create dom variables
     const playStat = document.querySelector("#playLevel");
@@ -106,10 +112,16 @@ const render = function(gameObj,charObj) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("main.js loaded")
+
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
     const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
+
+    // === ! INTERVAL VARIABLES ! === //
+    let timerInterval
+    let statInterval
+
     // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function() {
         console.log("start btn clicked")
@@ -117,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const kitty = new Character()
         const game = new Game()
         // invoke games start method
-        game.gameStart()
+        game.gameStart(timerInterval, game)
         // attach event listeners to buttons
         for (let i = 0; i < statBtns.length; i++) {
             statBtns[i].addEventListener("click", kitty.increaseStatLevel);
