@@ -61,6 +61,10 @@ class Game {
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
         }, 1000)
+
+        Game.gameObj.statInterval = setInterval(function(){
+            Game.gameObj.handleStatChange()
+        }, 1000)
     }
 }
 
