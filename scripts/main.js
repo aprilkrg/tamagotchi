@@ -48,11 +48,11 @@ class Game {
 	}
     gameStart() {
         console.log("game start invoked")
-        console.log(Game.gameInterval)
-        Game.gameInterval = setInterval(function(){
-            // this.gameTimer()
-            console.log(Game.gameTimer)
-        }, 1000)
+        // console.log(Game.gameInterval)
+        // obj.gameInterval = setInterval(function(){
+        //     obj.gameTimer()
+        //     // console.log(obj.gameTimer)
+        // }, 1000)
     }
 	handleStatChange(obj) {
 		// check that the param is grabbing the data you want
@@ -84,6 +84,27 @@ class Game {
 	}
 }
 
+const render = function(gameObj,charObj) {
+    // === ! Data & DOM for chatacter ! === //
+    // create dom variables
+    const playStat = document.querySelector("#playLevel");
+	const eatStat = document.querySelector("#eatLevel");
+	const sleepStat = document.querySelector("#sleepLevel");
+    // change width of html
+    playStat.style.width = charObj.playLevel + 'rem';
+	eatStat.style.width = charObj.eatLevel + 'rem';
+	sleepStat.style.width = charObj.sleepLevel + 'rem';
+    // set inner text of html
+    playStat.innerText = charObj.playLevel;
+	eatStat.innerText = charObj.eatLevel;
+	sleepStat.innerText = charObj.sleepLevel;
+    
+    // === ! Data & DOM for game ! === //
+    // create dom variables
+    const timer = document.querySelector("#timer")
+    // set inner text of html
+    timer.innerText = gameObj.timer
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("main.js loaded")
@@ -100,12 +121,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.querySelector("#start")
     startBtn.addEventListener("click", function() {
         console.log("start btn clicked")
+        // create new instances of each class for new game
         const kitty = new Character()
         const game = new Game()
+        // invoke games start method
+        game.gameStart()
+        // invoke render function
+        render(game,kitty)
     })
     const resetBtn = document.querySelector("#reset")
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
     })
-
 })
