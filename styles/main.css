@@ -1,19 +1,3 @@
-:root {
-    --green: #2a9d8f;
-    --yellow: #e9c46a;
-    --orange: #f4a261;
-    --red: #e76f51;
-    --blue: #264653;
-    --grey1: #495057;
-    --grey2: #343A40;
-    --grey3: #212529;
-
-    --green-blue: #7BE1C9;
-    --yellow-green: #C3E791;
-    --celeste: #B9EEEA;
-    --pink: #fde2e4;
-    --lavender: #cddafd;
-}
 * {
     margin:0;
     padding:0;
@@ -28,28 +12,4 @@ button {
     padding: 10px;
     margin: 2px;
     border-radius: 5px;
-}
-#play, #playLevel {
-    color: black;
-    background-color: var(--green-blue);
-}
-#playLevel {
-    width: 1rem;
-    padding: 20px;
-}
-#eat, #eatLevel {
-    color: black;
-    background-color: var(--yellow-green);
-}
-#eatLevel {
-    width: 1rem;
-    padding: 20px;
-}
-#sleep, #sleepLevel {
-    color: black;
-    background-color: var(--lavender);
-}
-#sleepLevel {
-    width: 1rem;
-    padding: 20px;
 }
