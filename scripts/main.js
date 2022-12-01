@@ -95,6 +95,7 @@ class Game {
                 // update the DOM
                 const msg = document.querySelector("h2")
                 msg.innerText = "YOU LOSE"
+                return
 			}
 		}
         // === ! YOU WIN ! === //
@@ -106,6 +107,7 @@ class Game {
             // update the DOM
             const msg = document.querySelector("h2")
             msg.innerText = "YOU WIN"
+            return
         }
 	}
 }
