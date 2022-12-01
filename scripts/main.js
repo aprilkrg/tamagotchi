@@ -86,6 +86,11 @@ class Game {
         // check the value of game timer, if it's 30 or more then you win
         // clear the intervals
         // display win msg
+        if(Game.gameObj.timer > 29) {
+            console.log("YOU WIN")
+            clearInterval(Game.gameObj.timerInterval)
+            clearInterval(Game.gameObj.statInterval)
+        }
     }
 }
 
