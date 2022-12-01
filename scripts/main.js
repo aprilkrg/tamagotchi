@@ -8,7 +8,7 @@ class Character {
 	// create the properties of the character and sets their initial value
 	constructor() {
 		this.name = "pet"
-		this.playLevel = 8
+		this.playLevel = 2
 		this.eatLevel = 10
 		this.sleepLevel = 10
 		console.log(this)
@@ -31,6 +31,8 @@ class Character {
 
 class Game {
 	static gameObj = {}
+    static timerInterval = null
+    static statInterval = null
 	// === ! CONSTRUCTOR ! === //
 	constructor() {
 		// set the initial values to null so that we can use this intentional lack of value in conditional statements later
@@ -51,13 +53,13 @@ class Game {
         const timer = document.querySelector("#timer")
         timer.innerText = Game.gameObj.timer
 	}
-    gameStart(timerInterval, statInterval) {
+    gameStart() {
         console.log("game start invoked")
         // === ! INTERVALS FOR GAMEPLAY ! === //
-        timerInterval = setInterval(function() {
+        Game.gameObj.timerInterval = setInterval(function() {
             Game.gameObj.gameTimer()
         }, 1000)
-        statInterval = setInterval(function() {
+        Game.gameObj.statInterval = setInterval(function() {
             Game.gameObj.handleStatChange(Character.charObj)
         }, 3000)
     }
@@ -77,22 +79,27 @@ class Game {
 	}
 	gameOver() {
         console.log("game over invoked")
-		// check the param data is what you think it is
-		// console.log(obj)
+        // === ! YOU LOSE ! === //
 		for (let [key, value] of Object.entries(Character.charObj)) {
 			// console.log(key, value)
 			if (Number.isInteger(value) && value === 0) {
 				console.log("GAME OVER")
-				// stop the interval
-				clearInterval(timerInterval)
-				clearInterval(statInterval)
+				// stop the intervals
+				clearInterval(Game.gameObj.timerInterval)
+				clearInterval(Game.gameObj.statInterval)
 			}
 		}
+        // === ! YOU WIN ! === //
+        console.log(Game.gameObj.timer)
+        // if(Game.gameObj.timer)
 	}
 }
 
 const render = function() {
     console.log("render invoked")
+
+    // check for game over conditions
+    Game.gameObj.gameOver()
 
     // === ! Data & DOM for chatacter ! === //
     // create dom variables
@@ -123,9 +130,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
 
-    // === ! INTERVAL VARIABLES ! === //
-    let timerInterval
-    let statInterval
+    // // === ! INTERVAL VARIABLES ! === //
+    // const timerInterval = Game.gameObj.timerInterval
+    // const statInterval = Game.gameObj.statInterval
 
     // === ! CLASS INSTANCES ! === //
     const kitty = new Character()
@@ -138,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("start btn clicked")
 
         // invoke games start method
-        Game.gameObj.gameStart(timerInterval, statInterval)
+        Game.gameObj.gameStart()
         // attach event listeners to buttons
         for (let i = 0; i < statBtns.length; i++) {
             statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel);
