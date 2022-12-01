@@ -149,5 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
+        const doggo = new Character()
+        Character.charObj = doggo
+        const bored = new Game()
+        Game.gameObj = bored
+        render()
     })
 })
