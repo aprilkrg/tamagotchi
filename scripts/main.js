@@ -16,10 +16,11 @@ class Character {
         console.log(this)
     }
     // === ! METHODS! === // 
-    increaseStatLevel(statToChange) {
+    increaseStatLevel(event) {
         console.log("increase stat invoked")
-        Character.charObj[statToChange]++
-        // console.log("after change",Character.charObj[statToChange])
+        const statId = event.target.id + "Level"
+        Character.charObj[statId]++
+        console.log("after change",Character.charObj)
     }
 }
 
@@ -105,7 +106,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const game = new Game()
     Game.gameObj = game
-    game.gameTimer()
+    // game.gameTimer()
     // game.handleStatChange()
-    game.gameStart()
+    // game.gameStart()
+
+    // === ! DOM VARIABLES ! === //
+    const startBtn = document.querySelector("#start")
+    const statBtns = document.querySelectorAll(".stat")
+    // console.log(statBtns)
+    
+    // === ! EVENT LISTENER ! === //
+    startBtn.addEventListener("click", function(){
+        console.log("start btn clicked")
+        // invoke the game start method
+        Game.gameObj.gameStart()
+        // attach event listeners to stat btns
+        for (let i = 0; i < statBtns.length; i++) {
+            statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel)
+        }
+    })
 })
