@@ -84,8 +84,7 @@ class Game {
 	}
 }
 
-const kitty = new Character()
-const game = new Game()
+
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("main.js loaded")
 	// kitty.playLevel = 5
@@ -97,4 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	// statInterval = setInterval(function () {
 	// 	game.handleStatChange(kitty)
 	// }, 3000)
+
+    const startBtn = document.querySelector("#start")
+    startBtn.addEventListener("click", function() {
+        console.log("start btn clicked")
+        const kitty = new Character()
+        const game = new Game()
+    })
+    const resetBtn = document.querySelector("#reset")
+    resetBtn.addEventListener("click", function() {
+        console.log("reset btn clicked")
+    })
+
 })
