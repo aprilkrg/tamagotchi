@@ -2,6 +2,8 @@ console.log("good morning developers")
 
 // VARIALBLES
 class Character {
+    // create static variable so we can share information between classes
+    static charObj = {} 
 	// === ! CONSTRUCTOR ! === //
 	// create the properties of the character and sets their initial value
 	constructor() {
@@ -14,7 +16,7 @@ class Character {
 	// === ! METHODS ! === //
 	// what are functions that will effect the character? they should be defined here
 	increaseStatLevel(statToChange) {
-        console.log("increase stat invoked")
+        console.log("increase stat invoked", statToChange)
 		// console.log the parameter to confirm it's working the way you think it is
 		// console.log("stat passed:", statToChange)
 		// if the stat level is at 10 guard it from increasing any more so the user can't go past 10
@@ -29,13 +31,11 @@ class Character {
 }
 
 class Game {
-	static gameInterval = null
-	static statInterval = null
+	static gameObj = {}
 	// === ! CONSTRUCTOR ! === //
 	constructor() {
 		// set the initial values to null so that we can use this intentional lack of value in conditional statements later
 		this.timer = null
-		this.gameOn = null
 		console.log(this)
 	}
 	// === ! METHODS ! === //
@@ -49,44 +49,47 @@ class Game {
 		// console log the time change to confirm it works
 		// console.log(this.timer)
 	}
-    gameStart(timerParam, gameObj) {
+    gameStart(timerInterval, statInterval) {
         console.log("game start invoked")
-        timerParam = setInterval(function() {gameObj.gameTimer()}, 1000)
+        // === ! INTERVALS FOR GAMEPLAY ! === //
+        timerInterval = setInterval(function() {
+            Game.gameObj.gameTimer()
+        }, 1000)
+        statInterval = setInterval(function() {
+            Game.gameObj.handleStatChange(Character.charObj)
+        }, 3000)
     }
-	handleStatChange(obj) {
+	handleStatChange() {
 		// check that the param is grabbing the data you want
-		console.log("handle stat change invoked", obj)
+		console.log("handle stat change invoked")
 		// loop over the key value pairs on the obj param
-		for (let [key, value] of Object.entries(obj)) {
+		for (let [key, value] of Object.entries(Character.charObj)) {
 			// if the value is a number and if it's greater than 1 then we want to effect it
 			if (Number.isInteger(value) && value >= 1) {
 				// decrement the stat
-				obj[key]--
-				this.gameOver(obj)
+				Character.charObj[key]--
+                // render any changes to DOM
+                render()
 			}
 		}
-        // render any changes to DOM
-        render()
-		// return obj to see the changes
-		// return obj
 	}
-	gameOver(obj) {
+	gameOver() {
         console.log("game over invoked")
 		// check the param data is what you think it is
 		// console.log(obj)
-		for (let [key, value] of Object.entries(obj)) {
+		for (let [key, value] of Object.entries(Character.charObj)) {
 			// console.log(key, value)
 			if (Number.isInteger(value) && value === 0) {
 				console.log("GAME OVER")
 				// stop the interval
-				clearInterval(Game.gameInterval)
-				clearInterval(Game.statInterval)
+				clearInterval(timerInterval)
+				clearInterval(statInterval)
 			}
 		}
 	}
 }
 
-const render = function(gameObj,charObj) {
+const render = function() {
     console.log("render invoked")
 
     // === ! Data & DOM for chatacter ! === //
@@ -95,19 +98,19 @@ const render = function(gameObj,charObj) {
 	const eatStat = document.querySelector("#eatLevel");
 	const sleepStat = document.querySelector("#sleepLevel");
     // change width of html
-    playStat.style.width = charObj.playLevel + 'rem';
-	eatStat.style.width = charObj.eatLevel + 'rem';
-	sleepStat.style.width = charObj.sleepLevel + 'rem';
+    playStat.style.width = Character.charObj.playLevel + 'rem';
+	eatStat.style.width = Character.charObj.eatLevel + 'rem';
+	sleepStat.style.width = Character.charObj.sleepLevel + 'rem';
     // set inner text of html
-    playStat.innerText = charObj.playLevel;
-	eatStat.innerText = charObj.eatLevel;
-	sleepStat.innerText = charObj.sleepLevel;
+    playStat.innerText = Character.charObj.playLevel;
+	eatStat.innerText = Character.charObj.eatLevel;
+	sleepStat.innerText = Character.charObj.sleepLevel;
     
     // === ! Data & DOM for game ! === //
     // create dom variables
     const timer = document.querySelector("#timer")
     // set inner text of html
-    timer.innerText = gameObj.timer
+    timer.innerText = Game.gameObj.timer
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -122,14 +125,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let timerInterval
     let statInterval
 
+    // === ! CLASS INSTANCES ! === //
+    const kitty = new Character()
+    Character.charObj = kitty
+    const game = new Game()
+    Game.gameObj = game
+
     // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function() {
         console.log("start btn clicked")
-        // create new instances of each class for new game
-        const kitty = new Character()
-        const game = new Game()
+
         // invoke games start method
-        game.gameStart(timerInterval, game)
+        Game.gameObj.gameStart(timerInterval, statInterval)
         // attach event listeners to buttons
         for (let i = 0; i < statBtns.length; i++) {
             statBtns[i].addEventListener("click", kitty.increaseStatLevel);
