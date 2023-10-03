@@ -12,20 +12,33 @@
     box-sizing: border-box;
 }
 body {
-    background-color: lightgreen;
+    background-color: var(--celeste);
     height: 100vh;
     width: 100vw;
     display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
     justify-content: center;
 }
 button {
     padding: 10px;
     border-radius: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
 }
 .levels {
     flex-direction: row;
+}
+#levels {
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#btns {
+    /* background-color: green; */
+    display: flex;
+    justify-content: space-around;
 }
 #play, #playLevel {
     background-color: var(--green-blue);
