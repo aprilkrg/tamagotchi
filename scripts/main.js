@@ -12,13 +12,13 @@ class Character {
     // === ! METHODS! === // 
     increaseStatLevel(event) {
         // console.log("increase stat invoked")
+
         const statId = event.target.id + "Level"
-        // guard against values going over 10
+        // Guard against stat values going over 10
         if(Character.charObj[statId] < 10) {
             Character.charObj[statId]++
             render()
         }
-        // console.log("after change",Character.charObj)
     }
 }
 
@@ -34,86 +34,74 @@ class Game {
     }
     // === ! METHODS! === // 
     gameTimer() {
-        console.log("timer tick toc")
-        // is the timer null ? if it is set to 0, if not increment time
+        // console.log("timer tick toc")
+
+        // If the timer is null set to 0, if not increment time
         if(this.timer === null) {
             this.timer = 0
         }
+        // is this conditional necessary?
         if(this.timerInterval !== null) {
             this.timer++
         }
-        // this.timer++
     }
     handleStatChange() {
-        console.log("handle stat change invoked")
-        // loop over the key value pairs on the char obj
-        // if the value is a number and if that number is > 0 then we want to change it
+        // console.log("handle stat change invoked")
+
+        // Loop over the key value pairs on the static char obj
+        // If the value is a number and if that number is > 0, then we want to change it
         for(let [key, value] of Object.entries(Character.charObj)){
             if(Number.isInteger(value) && value > 0){
-                // console.log("key:", key, "value:", value)
                 Character.charObj[key]--
             }
         }
-        // console.log(Character.charObj)
-        // is the game over invocation here borking it up? NO -> this is the best place to check for game over!
+        // this is the best place to check for game over!
         Game.gameObj.gameOver()
     }
     gameStart() {
-        console.log("game start invoked")
-        // increases the game time
+        // console.log("game start invoked")
+
+        // Increase the game time
         Game.timerInterval = setInterval(function(){
-            console.log("TIMER INTERVAL: \n")
             Game.gameObj.gameTimer()
-            // NEED TO RENDER HERE
-            // render()
         }, 1000)
-        // decreases the stats of the character
+        // Decrease the character stats
         Game.statInterval = setInterval(function(){
-            console.log("STAT INTERVAL: \n")
             Game.gameObj.handleStatChange()
-            // render here to avoid misstep between time and stat decrease
+            // Render here to avoid misstep between time and stat decrease
             render()
         }, 1000)
     }
     gameOver() {
-        console.log("game over invoked")
+        // console.log("game over invoked")
+
         // === ! LOSE CONDITION ! === //
-        // loop over character key value pairs
-        // conditionally check if the value is a number && that value is less than 1
-        // if both are true then clear intervals and display lose msg
+        // Loop over character obj key value pairs
+        // Conditionally check if the value is a number and that value is less than 1
+        // If both are true then clear intervals and display lose msg
         for(const property in Character.charObj) {
             if(Number.isInteger(Character.charObj[property]) && Character.charObj[property] < 1) {
-                // console.log("property:", property, "value", Character.charObj[property])
-                console.log("should be game over")
                 clearInterval(Game.timerInterval)
-                // Game.timerInterval = null
-                console.log("timer:", Game.timerInterval)
                 clearInterval(Game.statInterval)
-                // Game.statInterval = null
-                console.log("stat:", Game.statInterval)
-                // console.log("GAME OBJ", Game.gameObj)
                 const msg = document.querySelector("h1")
                 msg.innerText = "YOU LOSE - TRY AGAIN"
                 break;
             }
         }
-
         // === ! WIN CONDITION ! === //
-        // check the value of game timer, if it's 30 or more then you win
-        // clear the intervals
-        // display win msg
+        // Check the value of game timer, if it's 30 or more then you win
+        // Clear the intervals
+        // Display win msg
         if(Game.gameObj.timer > 29) {
-            console.log("YOU WIN")
             clearInterval(Game.timerInterval)
             clearInterval(Game.statInterval)
-
+            // === ! DOM VARS ! === //
             const statBtns = document.querySelectorAll(".stat")
             const msg = document.querySelector("h1")
-            // disable stat btns
+            // Disable stat btns
             for (let i = 0; i < statBtns.length; i++) {
                 statBtns[i].disabled = true
             }
-            console.log(statBtns)
             msg.innerText = "YOU WIN - DO YOU WANT TO PLAY AGAIN?"
             return
         }
@@ -121,83 +109,76 @@ class Game {
 }
 
 const render = function() {
-    console.log("render invoked")
+    // console.log("render invoked")
 
     // === ! DOM VARS ! === //
     const playStatEl = document.querySelector("#playLevel")
     const eatStatEl = document.querySelector("#eatLevel")
     const sleepStatEl = document.querySelector("#sleepLevel")
     const timerEl = document.querySelector("#timer")
-
-    // set styling on dom vars
+    // Set styling on dom vars
     playStatEl.style.height = Character.charObj.playLevel + "rem"
     eatStatEl.style.height = Character.charObj.eatLevel + "rem"
     sleepStatEl.style.height = Character.charObj.sleepLevel + "rem"
-
-    // set inner text on stats & timer
+    // Set inner text on stats & timer
     playStatEl.innerText = Character.charObj.playLevel
     eatStatEl.innerText = Character.charObj.eatLevel
     sleepStatEl.innerText = Character.charObj.sleepLevel
-    // if the gameObj timer is null, render 0, else render value from gameObj
+    // If the gameObj timer is null, render 0, else render value from gameObj
     timerEl.innerText = Game.gameObj.timer === null ? 0 : Game.gameObj.timer
 }
 
 const initialize = function() {
-    console.log("initialize invoked")
-    // create character class and save to static property
+    // console.log("initialize invoked")
+
+    // Create character class instance and save to static property
     const kitty = new Character()
     Character.charObj = kitty
-    // create game class and save to static property
+    // Create game class instance and save to static property
     const game = new Game()
     Game.gameObj = game
-    // Game.gameObj.timer = null
-    // Game.timerInterval = null
-    // Game.statInterval = null
     // === ! DOM VARIABLES ! === //
     const statBtns = document.querySelectorAll(".stat")
     const msg = document.querySelector("h1")
-    // set h1 to starting msg
+    // Set h1 to starting msg
     msg.innerText = "Begin the game by pressing the Start button"
-    // attach event listeners to stat btns
+    // Attach event listeners to stat btns
     for (let i = 0; i < statBtns.length; i++) {
         statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel)
     }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("main.js loaded")
-    
+    // console.log("main.js loaded")
+
     // === ! CREATE CLASS INSTANCES ! === //
     initialize()
-
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
     const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
-    
     // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function(){
-        console.log("start btn clicked")
-        // need to stop start btn from being clicked again bc it doubles up the intervals
+        // console.log("start btn clicked")
+
+        // Need to stop start btn from being clicked again bc it doubles up the intervals
         startBtn.disabled = true
-        // invoke the game start method
+        // Invoke the game start method
         Game.gameObj.gameStart()
         render()
     })
     resetBtn.addEventListener("click", function() {
-        console.log("reset btn clicked")
+        // console.log("reset btn clicked")
+
         initialize()
-        // Game.gameObj.timer = null
-        // console.log("NEW GAME FROM RESET CLICK", Game.gameObj, Game.statInterval, Game.timerInterval)
-        console.log("should be GAME OVER")
+        // Clear intervals
         clearInterval(Game.timerInterval)
-        Game.timerInterval = null
-        console.log("TIMER->", Game.timerInterval)
         clearInterval(Game.statInterval)
-        Game.statInterval = null
-        console.log("STAT->", Game.statInterval)
+        // setting to null unnecessary ??
+        // Game.timerInterval = null
+        // Game.statInterval = null
+        // Enable start and stat btns
         startBtn.disabled = false
-        // enable stat btns
         for (let i = 0; i < statBtns.length; i++) {
             statBtns[i].disabled = false
         }
