@@ -138,29 +138,24 @@ const render = function() {
 
 const initialize = function() {
     console.log("initialize invoked")
-    // === ! CREATE CLASS INSTANCES ! === //
+    // create character class and save to static property
     const kitty = new Character()
     Character.charObj = kitty
-
+    
+    // create game class and save to static property
     const game = new Game()
     Game.gameObj = game
+
+    // set h1 to original msg
+    const msg = document.querySelector("h1")
+    msg.innerText = "Begin the game by pressing the Start button"
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     console.log("main.js loaded")
-
+    
     // === ! CREATE CLASS INSTANCES ! === //
     initialize()
-    // const kitty = new Character()
-    // Character.charObj = kitty
-    // kitty.increaseStatLevel("eatLevel")
-    // kitty.increaseStatLevel("sleepLevel")
-
-    // const game = new Game()
-    // Game.gameObj = game
-    // game.gameTimer()
-    // game.handleStatChange()
-    // game.gameStart()
 
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
@@ -187,16 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // enable start btn again
         startBtn.disabled = false
         // create new isntances of game
-        const doggo = new Character()
-        Character.charObj = doggo
-        // set game intervals to null explicitly so they stop running
-        const game2 = new Game()
-        Game.gameObj = game2
-        Game.gameObj.timer = null
-        console.log("NEW GAME:", Game.gameObj)
-        // change h1 to original msg
-        const msg = document.querySelector("h1")
-        msg.innerText = "Begin the game by pressing the Start button"
+        initialize()
 
         render()
     })
