@@ -66,7 +66,7 @@ class Game {
         // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
-            // NOTE do i need to invoke game over here or is that taken care of elsewhere??????
+            // NEED TO RENDER HERE
             render()
         }, 1000)
         // decreases the stats of the character
@@ -113,8 +113,6 @@ class Game {
 
 const render = function() {
     console.log("render invoked")
-    // // check if the game should end
-    // Game.gameObj.gameOver()
 
     // === ! DOM VARS ! === //
     const playStatEl = document.querySelector("#playLevel")
@@ -132,7 +130,6 @@ const render = function() {
     eatStatEl.innerText = Character.charObj.eatLevel
     sleepStatEl.innerText = Character.charObj.sleepLevel
     // if the gameObj timer is null, render 0, else render value from gameObj
-    // console.log("ARE YOU NULL?", Game.gameObj)
     timerEl.innerText = Game.gameObj.timer === null ? 0 : Game.gameObj.timer
 
     // check if the game should end
@@ -163,6 +160,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // === ! EVENT LISTENER ! === //
     startBtn.addEventListener("click", function(){
         console.log("start btn clicked")
+        // need to stop start btn from being clicked again bc it doubles up the intervals
+        startBtn.disabled = true
+        console.log("NEEDS TO DISABLE", startBtn)
         // invoke the game start method
         Game.gameObj.gameStart()
         // attach event listeners to stat btns
@@ -173,6 +173,8 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
+        // enable start btn again
+        // set game intervals to null explicitly so they stop running
         // create new isntances of game
         const doggo = new Character()
         Character.charObj = doggo
