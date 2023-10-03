@@ -34,7 +34,9 @@ button {
     padding-bottom: 1rem;
 }
 .levels {
-    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 #levels {
     height: 10rem;
