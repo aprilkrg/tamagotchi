@@ -75,6 +75,10 @@ class Game {
     gameOver() {
         // console.log("game over invoked")
 
+        // === ! DOM VARS ! === //
+        const statBtns = document.querySelectorAll(".stat")
+        const msg = document.querySelector("h1")
+
         // === ! LOSE CONDITION ! === //
         // Loop over character obj key value pairs
         // Conditionally check if the value is a number and that value is less than 1
@@ -83,7 +87,10 @@ class Game {
             if(Number.isInteger(Character.charObj[property]) && Character.charObj[property] < 1) {
                 clearInterval(Game.timerInterval)
                 clearInterval(Game.statInterval)
-                const msg = document.querySelector("h1")
+                // Disable stat btns
+                for (let i = 0; i < statBtns.length; i++) {
+                    statBtns[i].disabled = true
+                }
                 msg.innerText = "YOU LOSE - TRY AGAIN"
                 break;
             }
@@ -95,9 +102,6 @@ class Game {
         if(Game.gameObj.timer > 29) {
             clearInterval(Game.timerInterval)
             clearInterval(Game.statInterval)
-            // === ! DOM VARS ! === //
-            const statBtns = document.querySelectorAll(".stat")
-            const msg = document.querySelector("h1")
             // Disable stat btns
             for (let i = 0; i < statBtns.length; i++) {
                 statBtns[i].disabled = true
