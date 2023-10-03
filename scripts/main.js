@@ -1,9 +1,3 @@
-console.log("good morning developers")
-// character class
-// game class
-// redner function
-// dom content loaded function
-
 class Character {
     // === ! STATIC VARS ! === // 
     static charObj = {}
@@ -41,9 +35,7 @@ class Game {
     // === ! METHODS! === // 
     gameTimer() {
         console.log("timer tick toc")
-        // is the timer not null
-        // if it is set to 0
-        // if not increment time
+        // is the timer null ? if it is set to 0, if not increment time
         if(this.timer === null) {
             this.timer = 0
         }
@@ -72,7 +64,7 @@ class Game {
         // decreases the stats of the character
         Game.gameObj.statInterval = setInterval(function(){
             Game.gameObj.handleStatChange()
-            // will rendering here solve the game over problem of showing stat of 1 when it's 0?
+            // render here to avoid misstep between time and stat decrease
             render()
             Game.gameObj.gameOver()
         }, 1000)
@@ -90,7 +82,7 @@ class Game {
                 clearInterval(Game.gameObj.statInterval)
                 console.log("GAME OBJ", Game.gameObj)
                 const msg = document.querySelector("h1")
-                msg.innerText = "YOU LOSE TRY AGAIN"
+                msg.innerText = "YOU LOSE - TRY AGAIN"
                 return
             }
         }
@@ -104,8 +96,7 @@ class Game {
             clearInterval(Game.gameObj.timerInterval)
             clearInterval(Game.gameObj.statInterval)
             const msg = document.querySelector("h1")
-            // console.log(msg)
-            msg.innerText = "YOU WIN DO YOU WANT TO PLAY AGAIN"
+            msg.innerText = "YOU WIN - DO YOU WANT TO PLAY AGAIN?"
             return
         }
     }
@@ -113,6 +104,8 @@ class Game {
 
 const render = function() {
     console.log("render invoked")
+    // check if the game should end
+    // Game.gameObj.gameOver()
 
     // === ! DOM VARS ! === //
     const playStatEl = document.querySelector("#playLevel")
@@ -141,14 +134,18 @@ const initialize = function() {
     // create character class and save to static property
     const kitty = new Character()
     Character.charObj = kitty
-    
     // create game class and save to static property
     const game = new Game()
     Game.gameObj = game
-
-    // set h1 to original msg
+    // === ! DOM VARIABLES ! === //
+    const statBtns = document.querySelectorAll(".stat")
     const msg = document.querySelector("h1")
+    // set h1 to starting msg
     msg.innerText = "Begin the game by pressing the Start button"
+    // attach event listeners to stat btns
+    for (let i = 0; i < statBtns.length; i++) {
+        statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel)
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -168,22 +165,15 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("start btn clicked")
         // need to stop start btn from being clicked again bc it doubles up the intervals
         startBtn.disabled = true
-        console.log("NEEDS TO DISABLE", startBtn)
         // invoke the game start method
         Game.gameObj.gameStart()
-        // attach event listeners to stat btns
-        for (let i = 0; i < statBtns.length; i++) {
-            statBtns[i].addEventListener("click", Character.charObj.increaseStatLevel)
-        }
         render()
     })
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
-        // enable start btn again
         startBtn.disabled = false
-        // create new isntances of game
         initialize()
-
+        console.log("in reset ->", Game.gameObj, Game.timerInterval, Game.statInterval)
         render()
     })
 })
