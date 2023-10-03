@@ -182,13 +182,13 @@ document.addEventListener("DOMContentLoaded", function() {
         initialize()
         // Game.gameObj.timer = null
         // console.log("NEW GAME FROM RESET CLICK", Game.gameObj, Game.statInterval, Game.timerInterval)
-        // console.log("should be GAME OVER")
-        // clearInterval(Game.timerInterval)
-        // Game.timerInterval = null
-        // console.log("TIMER->", Game.timerInterval)
-        // clearInterval(Game.statInterval)
-        // Game.statInterval = null
-        // console.log("STAT->", Game.statInterval)
+        console.log("should be GAME OVER")
+        clearInterval(Game.timerInterval)
+        Game.timerInterval = null
+        console.log("TIMER->", Game.timerInterval)
+        clearInterval(Game.statInterval)
+        Game.statInterval = null
+        console.log("STAT->", Game.statInterval)
         render()
     })
 })
