@@ -86,8 +86,8 @@ class Game {
                 console.log("GAME OVER")
                 clearInterval(Game.gameObj.timerInterval)
                 clearInterval(Game.gameObj.statInterval)
+                console.log("GAME OBJ", Game.gameObj)
                 const msg = document.querySelector("h1")
-                // console.log(msg)
                 msg.innerText = "YOU LOSE TRY AGAIN"
                 return
             }
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
         Character.charObj = doggo
         const game2 = new Game()
         Game.gameObj = game2
-
+        console.log("NEW GAME:", Game.gameObj)
         // change h1 to original msg
         const msg = document.querySelector("h1")
         msg.innerText = "Begin the game by pressing the Start button"

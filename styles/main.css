@@ -31,8 +31,6 @@ button {
     height: max-content;
 }
 #board > div {
-    /* background-color: green; */
-    /* border: yellow 2px solid; */
     padding-bottom: 1rem;
 }
 .levels {
@@ -54,16 +52,19 @@ button {
 }
 #playLevel {
     width: 10rem;
+    height: 10rem;
 }
 #eat, #eatLevel {
     background-color: var(--yellow-green);
 }
 #eatLevel {
     width: 10rem;
+    height: 10rem;
 }
 #sleep, #sleepLevel {
     background-color: var(--lavender);
 }
 #sleepLevel {
     width: 10rem;
+    height: 10rem;
 }
