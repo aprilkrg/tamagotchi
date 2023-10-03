@@ -121,9 +121,10 @@ const render = function() {
     const sleepStatEl = document.querySelector("#sleepLevel")
     const timerEl = document.querySelector("#timer")
     // Set styling on dom vars
-    playStatEl.style.height = Character.charObj.playLevel + "rem"
-    eatStatEl.style.height = Character.charObj.eatLevel + "rem"
-    sleepStatEl.style.height = Character.charObj.sleepLevel + "rem"
+    // ternary statement to check if level is greater than 0, if it is set height dynamically, if not set to 1rem to try to stop the columns from smooshing together on game over
+    playStatEl.style.height = Character.charObj.playLevel > 0 ? Character.charObj.playLevel + "rem" : "1rem"
+    eatStatEl.style.height = Character.charObj.eatLevel > 0 ? Character.charObj.eatLevel + "rem" : "1rem"
+    sleepStatEl.style.height = Character.charObj.sleepLevel > 0 ? Character.charObj.sleepLevel + "rem" : "1rem"
     // Set inner text on stats & timer
     playStatEl.innerText = Character.charObj.playLevel
     eatStatEl.innerText = Character.charObj.eatLevel
