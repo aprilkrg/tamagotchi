@@ -7,18 +7,18 @@ class Character {
         this.playLevel = 10
         this.eatLevel = 10
         this.sleepLevel = 10
-        console.log(this)
+        // console.log(this)
     }
     // === ! METHODS! === // 
     increaseStatLevel(event) {
-        console.log("increase stat invoked")
+        // console.log("increase stat invoked")
         const statId = event.target.id + "Level"
         // guard against values going over 10
         if(Character.charObj[statId] < 10) {
             Character.charObj[statId]++
             render()
         }
-        console.log("after change",Character.charObj)
+        // console.log("after change",Character.charObj)
     }
 }
 
@@ -30,7 +30,7 @@ class Game {
     // === ! CONSTRUCTOR ! === // 
     constructor () {
         this.timer = null
-        console.log(this)
+        // console.log(this)
     }
     // === ! METHODS! === // 
     gameTimer() {
@@ -39,7 +39,10 @@ class Game {
         if(this.timer === null) {
             this.timer = 0
         }
-        this.timer++
+        if(this.timerInterval !== null) {
+            this.timer++
+
+        }
     }
     handleStatChange() {
         console.log("handle stat change invoked")
@@ -51,10 +54,10 @@ class Game {
                 Character.charObj[key]--
             }
         }
-        console.log(Character.charObj)
+        // console.log(Character.charObj)
     }
     gameStart() {
-        console.log("game start invoked", Game.gameObj.timer)
+        console.log("game start invoked")
         // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
             Game.gameObj.gameTimer()
@@ -66,26 +69,44 @@ class Game {
             Game.gameObj.handleStatChange()
             // render here to avoid misstep between time and stat decrease
             render()
-            Game.gameObj.gameOver()
+            // is the game over invocation here borking it up?
+            // Game.gameObj.gameOver()
         }, 1000)
     }
     gameOver() {
         console.log("game over invoked")
         // === ! LOSE CONDITION ! === //
+        // could i rewrite lose condition using Object.values since I never use the key above^
+        for(const property in Character.charObj) {
+            if(Number.isInteger(Character.charObj[property]) && Character.charObj[property] < 1) {
+                // console.log("property:", property, "value", Character.charObj[property])
+                console.log("should be game over")
+                clearInterval(Game.gameObj.timerInterval)
+                Game.gameObj.timerInterval = null
+                console.log("timer:", Game.gameObj.timerInterval)
+                clearInterval(Game.gameObj.statInterval)
+                Game.gameObj.statInterval = null
+                console.log("stat:", Game.gameObj.statInterval)
+                // console.log("GAME OBJ", Game.gameObj)
+                const msg = document.querySelector("h1")
+                msg.innerText = "YOU LOSE - TRY AGAIN"
+                break;
+            }
+        }
         // loop over character key value pairs
         // conditionally check if the value is a number && that value is less than 1
         // if both are true then clear intervals and display lose msg
-        for(let [key, value] of Object.entries(Character.charObj)) {
-            if(Number.isInteger(value) && value === 0) {
-                console.log("GAME OVER")
-                clearInterval(Game.gameObj.timerInterval)
-                clearInterval(Game.gameObj.statInterval)
-                console.log("GAME OBJ", Game.gameObj)
-                const msg = document.querySelector("h1")
-                msg.innerText = "YOU LOSE - TRY AGAIN"
-                return
-            }
-        }
+        // for(let [key, value] of Object.entries(Character.charObj)) {
+        //     if(Number.isInteger(value) && value === 0) {
+        //         console.log("GAME OVER")
+        //         clearInterval(Game.gameObj.timerInterval)
+        //         clearInterval(Game.gameObj.statInterval)
+        //         // console.log("GAME OBJ", Game.gameObj)
+        //         const msg = document.querySelector("h1")
+        //         msg.innerText = "YOU LOSE - TRY AGAIN"
+        //         return
+        //     }
+        // }
 
         // === ! WIN CONDITION ! === //
         // check the value of game timer, if it's 30 or more then you win
@@ -156,11 +177,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
-    const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
-    // console.log(resetBtn)
     
-    // === ! EVENT LISTENER ! === //
+    // === ! EVENT LISTENERS ! === //
     startBtn.addEventListener("click", function(){
         console.log("start btn clicked")
         // need to stop start btn from being clicked again bc it doubles up the intervals
@@ -173,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("reset btn clicked")
         startBtn.disabled = false
         initialize()
-        console.log("in reset ->", Game.gameObj, Game.timerInterval, Game.statInterval)
+        // console.log("in reset ->", Game.gameObj, Game.timerInterval, Game.statInterval)
         render()
     })
 })
