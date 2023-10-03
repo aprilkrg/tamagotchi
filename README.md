@@ -31,4 +31,4 @@ The original life simulation game - Tamagotchi! The player creates and cares for
 ## Icebox
 - decrease the characters stats more quickly/randomly
 
-NEXT: [PROJECT STEPS](https://hackmd.io/b2h8sMIFRCW-tZSlQ_IbjQ)
+NEXT: [PROJECT STEPS ON hackmd.io](https://hackmd.io/b2h8sMIFRCW-tZSlQ_IbjQ)

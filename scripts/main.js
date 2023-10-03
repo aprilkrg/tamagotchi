@@ -172,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // === ! DOM VARIABLES ! === //
     const startBtn = document.querySelector("#start")
+    const statBtns = document.querySelectorAll(".stat")
     const resetBtn = document.querySelector("#reset")
     
     // === ! EVENT LISTENERS ! === //
@@ -185,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
-        startBtn.disabled = false
         initialize()
         // Game.gameObj.timer = null
         // console.log("NEW GAME FROM RESET CLICK", Game.gameObj, Game.statInterval, Game.timerInterval)
@@ -196,6 +196,11 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(Game.statInterval)
         Game.statInterval = null
         console.log("STAT->", Game.statInterval)
+        startBtn.disabled = false
+        // enable stat btns
+        for (let i = 0; i < statBtns.length; i++) {
+            statBtns[i].disabled = false
+        }
         render()
     })
 })
