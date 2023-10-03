@@ -106,7 +106,14 @@ class Game {
             console.log("YOU WIN")
             clearInterval(Game.timerInterval)
             clearInterval(Game.statInterval)
+
+            const statBtns = document.querySelectorAll(".stat")
             const msg = document.querySelector("h1")
+            // disable stat btns
+            for (let i = 0; i < statBtns.length; i++) {
+                statBtns[i].disabled = true
+            }
+            console.log(statBtns)
             msg.innerText = "YOU WIN - DO YOU WANT TO PLAY AGAIN?"
             return
         }
