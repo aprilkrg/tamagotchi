@@ -39,10 +39,10 @@ class Game {
         if(this.timer === null) {
             this.timer = 0
         }
-        // if(this.timerInterval !== null) {
-        //     this.timer++
-        // }
-        this.timer++
+        if(this.timerInterval !== null) {
+            this.timer++
+        }
+        // this.timer++
     }
     handleStatChange() {
         console.log("handle stat change invoked")
@@ -61,14 +61,14 @@ class Game {
     gameStart() {
         console.log("game start invoked")
         // increases the game time
-        Game.gameObj.timerInterval = setInterval(function(){
+        Game.timerInterval = setInterval(function(){
             console.log("TIMER INTERVAL: \n")
             Game.gameObj.gameTimer()
             // NEED TO RENDER HERE
             // render()
         }, 1000)
         // decreases the stats of the character
-        Game.gameObj.statInterval = setInterval(function(){
+        Game.statInterval = setInterval(function(){
             console.log("STAT INTERVAL: \n")
             Game.gameObj.handleStatChange()
             // render here to avoid misstep between time and stat decrease
@@ -85,12 +85,12 @@ class Game {
             if(Number.isInteger(Character.charObj[property]) && Character.charObj[property] < 1) {
                 // console.log("property:", property, "value", Character.charObj[property])
                 console.log("should be game over")
-                clearInterval(Game.gameObj.timerInterval)
-                Game.gameObj.timerInterval = null
-                console.log("timer:", Game.gameObj.timerInterval)
-                clearInterval(Game.gameObj.statInterval)
-                Game.gameObj.statInterval = null
-                console.log("stat:", Game.gameObj.statInterval)
+                clearInterval(Game.timerInterval)
+                // Game.timerInterval = null
+                console.log("timer:", Game.timerInterval)
+                clearInterval(Game.statInterval)
+                // Game.statInterval = null
+                console.log("stat:", Game.statInterval)
                 // console.log("GAME OBJ", Game.gameObj)
                 const msg = document.querySelector("h1")
                 msg.innerText = "YOU LOSE - TRY AGAIN"
@@ -104,8 +104,8 @@ class Game {
         // display win msg
         if(Game.gameObj.timer > 29) {
             console.log("YOU WIN")
-            clearInterval(Game.gameObj.timerInterval)
-            clearInterval(Game.gameObj.statInterval)
+            clearInterval(Game.timerInterval)
+            clearInterval(Game.statInterval)
             const msg = document.querySelector("h1")
             msg.innerText = "YOU WIN - DO YOU WANT TO PLAY AGAIN?"
             return
@@ -144,8 +144,8 @@ const initialize = function() {
     const game = new Game()
     Game.gameObj = game
     // Game.gameObj.timer = null
-    // Game.gameObj.timerInterval = null
-    // Game.gameObj.statInterval = null
+    // Game.timerInterval = null
+    // Game.statInterval = null
     // === ! DOM VARIABLES ! === //
     const statBtns = document.querySelectorAll(".stat")
     const msg = document.querySelector("h1")
