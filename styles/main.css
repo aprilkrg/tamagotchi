@@ -25,18 +25,27 @@ button {
     border-radius: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
+    margin-top:.5rem;
+}
+#board {
+    height: max-content;
+}
+#board > div {
+    /* background-color: green; */
+    /* border: yellow 2px solid; */
+    padding-bottom: 1rem;
 }
 .levels {
     flex-direction: row;
 }
 #levels {
-    /* background-color: yellow; */
+    height: 10rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: flex-end;
 }
 #btns {
-    /* background-color: green; */
     display: flex;
     justify-content: space-around;
 }
