@@ -69,14 +69,16 @@ class Game {
             Game.gameObj.handleStatChange()
             // render here to avoid misstep between time and stat decrease
             render()
-            // is the game over invocation here borking it up?
-            // Game.gameObj.gameOver()
+            // is the game over invocation here borking it up? NO -> this is the best place to check for game over!
+            Game.gameObj.gameOver()
         }, 1000)
     }
     gameOver() {
         console.log("game over invoked")
         // === ! LOSE CONDITION ! === //
-        // could i rewrite lose condition using Object.values since I never use the key above^
+        // loop over character key value pairs
+        // conditionally check if the value is a number && that value is less than 1
+        // if both are true then clear intervals and display lose msg
         for(const property in Character.charObj) {
             if(Number.isInteger(Character.charObj[property]) && Character.charObj[property] < 1) {
                 // console.log("property:", property, "value", Character.charObj[property])
@@ -93,20 +95,6 @@ class Game {
                 break;
             }
         }
-        // loop over character key value pairs
-        // conditionally check if the value is a number && that value is less than 1
-        // if both are true then clear intervals and display lose msg
-        // for(let [key, value] of Object.entries(Character.charObj)) {
-        //     if(Number.isInteger(value) && value === 0) {
-        //         console.log("GAME OVER")
-        //         clearInterval(Game.gameObj.timerInterval)
-        //         clearInterval(Game.gameObj.statInterval)
-        //         // console.log("GAME OBJ", Game.gameObj)
-        //         const msg = document.querySelector("h1")
-        //         msg.innerText = "YOU LOSE - TRY AGAIN"
-        //         return
-        //     }
-        // }
 
         // === ! WIN CONDITION ! === //
         // check the value of game timer, if it's 30 or more then you win
@@ -125,8 +113,6 @@ class Game {
 
 const render = function() {
     console.log("render invoked")
-    // check if the game should end
-    // Game.gameObj.gameOver()
 
     // === ! DOM VARS ! === //
     const playStatEl = document.querySelector("#playLevel")
@@ -145,9 +131,6 @@ const render = function() {
     sleepStatEl.innerText = Character.charObj.sleepLevel
     // if the gameObj timer is null, render 0, else render value from gameObj
     timerEl.innerText = Game.gameObj.timer === null ? 0 : Game.gameObj.timer
-
-    // check if the game should end
-    Game.gameObj.gameOver()
 }
 
 const initialize = function() {
