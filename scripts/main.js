@@ -136,17 +136,28 @@ const render = function() {
     Game.gameObj.gameOver()
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("main.js loaded")
-
-    // === ! CLASS INSTANCES ! === //
+const initialize = function() {
+    console.log("initialize invoked")
+    // === ! CREATE CLASS INSTANCES ! === //
     const kitty = new Character()
     Character.charObj = kitty
-    // kitty.increaseStatLevel("eatLevel")
-    // kitty.increaseStatLevel("sleepLevel")
 
     const game = new Game()
     Game.gameObj = game
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("main.js loaded")
+
+    // === ! CREATE CLASS INSTANCES ! === //
+    initialize()
+    // const kitty = new Character()
+    // Character.charObj = kitty
+    // kitty.increaseStatLevel("eatLevel")
+    // kitty.increaseStatLevel("sleepLevel")
+
+    // const game = new Game()
+    // Game.gameObj = game
     // game.gameTimer()
     // game.handleStatChange()
     // game.gameStart()
@@ -174,12 +185,14 @@ document.addEventListener("DOMContentLoaded", function() {
     resetBtn.addEventListener("click", function() {
         console.log("reset btn clicked")
         // enable start btn again
-        // set game intervals to null explicitly so they stop running
+        startBtn.disabled = false
         // create new isntances of game
         const doggo = new Character()
         Character.charObj = doggo
+        // set game intervals to null explicitly so they stop running
         const game2 = new Game()
         Game.gameObj = game2
+        Game.gameObj.timer = null
         console.log("NEW GAME:", Game.gameObj)
         // change h1 to original msg
         const msg = document.querySelector("h1")
