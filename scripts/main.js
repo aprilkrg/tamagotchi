@@ -39,10 +39,10 @@ class Game {
         if(this.timer === null) {
             this.timer = 0
         }
-        if(this.timerInterval !== null) {
-            this.timer++
-
-        }
+        // if(this.timerInterval !== null) {
+        //     this.timer++
+        // }
+        this.timer++
     }
     handleStatChange() {
         console.log("handle stat change invoked")
@@ -55,22 +55,24 @@ class Game {
             }
         }
         // console.log(Character.charObj)
+        // is the game over invocation here borking it up? NO -> this is the best place to check for game over!
+        Game.gameObj.gameOver()
     }
     gameStart() {
         console.log("game start invoked")
         // increases the game time
         Game.gameObj.timerInterval = setInterval(function(){
+            console.log("TIMER INTERVAL: \n")
             Game.gameObj.gameTimer()
             // NEED TO RENDER HERE
-            render()
+            // render()
         }, 1000)
         // decreases the stats of the character
         Game.gameObj.statInterval = setInterval(function(){
+            console.log("STAT INTERVAL: \n")
             Game.gameObj.handleStatChange()
             // render here to avoid misstep between time and stat decrease
             render()
-            // is the game over invocation here borking it up? NO -> this is the best place to check for game over!
-            Game.gameObj.gameOver()
         }, 1000)
     }
     gameOver() {
@@ -141,6 +143,9 @@ const initialize = function() {
     // create game class and save to static property
     const game = new Game()
     Game.gameObj = game
+    // Game.gameObj.timer = null
+    // Game.gameObj.timerInterval = null
+    // Game.gameObj.statInterval = null
     // === ! DOM VARIABLES ! === //
     const statBtns = document.querySelectorAll(".stat")
     const msg = document.querySelector("h1")
@@ -175,7 +180,15 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("reset btn clicked")
         startBtn.disabled = false
         initialize()
-        // console.log("in reset ->", Game.gameObj, Game.timerInterval, Game.statInterval)
+        // Game.gameObj.timer = null
+        // console.log("NEW GAME FROM RESET CLICK", Game.gameObj, Game.statInterval, Game.timerInterval)
+        // console.log("should be GAME OVER")
+        // clearInterval(Game.timerInterval)
+        // Game.timerInterval = null
+        // console.log("TIMER->", Game.timerInterval)
+        // clearInterval(Game.statInterval)
+        // Game.statInterval = null
+        // console.log("STAT->", Game.statInterval)
         render()
     })
 })
