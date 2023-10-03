@@ -72,6 +72,8 @@ class Game {
         // decreases the stats of the character
         Game.gameObj.statInterval = setInterval(function(){
             Game.gameObj.handleStatChange()
+            // will rendering here solve the game over problem of showing stat of 1 when it's 0?
+            render()
             Game.gameObj.gameOver()
         }, 1000)
     }
@@ -111,8 +113,8 @@ class Game {
 
 const render = function() {
     console.log("render invoked")
-    // check if the game should end
-    Game.gameObj.gameOver()
+    // // check if the game should end
+    // Game.gameObj.gameOver()
 
     // === ! DOM VARS ! === //
     const playStatEl = document.querySelector("#playLevel")
@@ -129,7 +131,12 @@ const render = function() {
     playStatEl.innerText = Character.charObj.playLevel
     eatStatEl.innerText = Character.charObj.eatLevel
     sleepStatEl.innerText = Character.charObj.sleepLevel
-    timerEl.innerText = Game.gameObj.timer
+    // if the gameObj timer is null, render 0, else render value from gameObj
+    // console.log("ARE YOU NULL?", Game.gameObj)
+    timerEl.innerText = Game.gameObj.timer === null ? 0 : Game.gameObj.timer
+
+    // check if the game should end
+    Game.gameObj.gameOver()
 }
 
 document.addEventListener("DOMContentLoaded", function() {
